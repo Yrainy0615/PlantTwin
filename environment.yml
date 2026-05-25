@@ -1,0 +1,48 @@
+name: planttwin
+channels:
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.10
+  - cuda-toolkit=13.0
+  - pip:
+    # Core - PyTorch 2.12.0 with CUDA 13.0 (native Blackwell sm_120 support)
+    - torch==2.12.0
+    - torchvision==0.27.0
+    # Attention
+    - xformers==0.0.35
+    # TRELLIS deps
+    - pillow
+    - imageio
+    - imageio-ffmpeg
+    - tqdm
+    - easydict
+    - opencv-python-headless
+    - scipy
+    - ninja
+    - rembg
+    - onnxruntime
+    - trimesh
+    - open3d
+    - xatlas
+    - pyvista
+    - pymeshfix
+    - igraph
+    - transformers
+    - spconv-cu120
+    # Video diffusion
+    - diffusers
+    - accelerate
+    # Differentiable physics
+    - taichi
+    # Custom CUDA extensions (install from source with CUDA_HOME pointing to conda nvcc):
+    # - diffoctreerast: pip install /tmp/extensions/diffoctreerast --no-build-isolation
+    # - diff-gaussian-rasterization: pip install mip-splatting/submodules/diff-gaussian-rasterization --no-build-isolation
+    # - nvdiffrast: pip install /tmp/extensions/nvdiffrast --no-build-isolation
+    # - utils3d: pip install git+https://github.com/EasternJournalist/utils3d.git@9a4eb15
+
+# Notes:
+# - GPU: RTX 5070 Ti (Blackwell, sm_120) requires PyTorch 2.12.0+cu130
+# - CUDA extensions must be compiled with conda-installed nvcc 13.0 (set CUDA_HOME)
+# - Use ATTN_BACKEND=xformers (flash_attn prebuilt wheels not available for torch 2.12)
+# - kaolin not needed (FlexiCubes patched to remove dependency)

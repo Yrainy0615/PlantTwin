@@ -1,2 +1,42 @@
-docs/
-docs/
+# Third party repos
+third_party/
+
+# Generated data
+data/plants_3dgs/
+data/plants_video/
+
+# Training outputs
+outputs/
+
+# Model weights and checkpoints
+checkpoints/
+*.ckpt
+*.pth
+*.pt
+*.bin
+*.safetensors
+
+# HuggingFace cache
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+/tmp/

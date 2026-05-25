@@ -1,0 +1,174 @@
+# PlantTwin: Text prompts for 3DGS plant generation
+# IMPORTANT: All prompts must describe a SINGLE plant with ONE root/main stem.
+# Complex branching is fine, but NO bunches, groups, or multiple separate plants.
+# Excluding trees. Covering: flowers, herbs, shrubs, succulents, ferns, grasses, vines, aquatic, tropical foliage
+# Diversity axes: species, stem thickness, leaf count, structural complexity
+
+# ============================================================
+# FLOWERS — thin to medium stems, variable petal/leaf count
+# ============================================================
+
+# Thin stem, few leaves, simple structure
+a single red rose on a thin thorny stem with three leaves
+a single white tulip with a smooth slender stem and two broad leaves
+a single purple iris with one tall stem and sword-shaped leaves
+a single stem of lily of the valley with tiny bell flowers
+
+# Thin stem, many leaves/flowers on one stem, moderate complexity
+a single lavender plant with one main stem branching into flower spikes
+a single snapdragon with a tall spike of colorful tubular flowers
+a single foxglove with a tall stem covered in bell-shaped flowers
+a single delphinium with one tall flower spike and lobed leaves
+
+# Medium stem, large flowers, moderate structure
+a single white lily with a thick fleshy stem and three large trumpet flowers
+a single amaryllis with a stout stem and two large red blooms on top
+a single peony with one thick stem supporting a heavy pink flower head
+a single dahlia with a sturdy stem and one large layered spherical flower
+
+# Medium-thick stem, complex branching from single base
+a single hydrangea plant with woody branching stems from one base and blue flower clusters
+a single bougainvillea with tangled branches from one trunk and magenta bracts
+a single chrysanthemum with one main stem branching into multiple yellow blooms
+
+# ============================================================
+# HERBS — mostly thin stems, variable leaf density
+# ============================================================
+
+# Thin single stem, few leaves
+a single young basil plant with one thin green stem and four broad leaves
+a single mint plant with one square stem and opposite leaf pairs
+a single cilantro plant with one slender stem and feathery compound leaves
+
+# Single stem, dense foliage
+a single mature basil plant with one main stem densely covered in aromatic leaves
+a single parsley plant with one root crown producing many curly leaf stalks
+a single dill plant with one tall hollow stem and feathery fronds
+
+# Woody single stem, aromatic
+a single rosemary plant with one woody main stem and needle-like leaves
+a single sage plant with one thick stem and large velvety grey-green leaves
+a single lemongrass plant with one thick pale base and long arching blades
+
+# ============================================================
+# SHRUBS (non-tree) — medium to thick stems, high complexity
+# ============================================================
+
+# Thick single trunk, few branches
+a single young camellia with one thick woody stem and glossy dark leaves
+a single gardenia plant with one main stout trunk and waxy white flowers
+
+# Single trunk, dense branching
+a single boxwood plant with one main stem branching into dense small leaves
+a single azalea with one gnarly main trunk covered in pink blossoms
+a single holly plant with one thick stem and spiny dark green leaves with red berries
+
+# Very thick single trunk, architectural
+a single jade plant with one thick succulent trunk branching into round leaves
+a single desert rose with one swollen thick caudex and sparse branches with pink flowers
+a single adenium with a bulbous base and twisted branches with red flowers
+
+# ============================================================
+# SUCCULENTS & CACTI — thick bodies, single rosette or stem
+# ============================================================
+
+# Single compact rosette
+a single echeveria succulent with one tight rosette of pale green thick leaves
+a single haworthia with one spiral of pointed translucent fleshy leaves
+a single aeonium with one rosette on a single woody stem
+
+# Single plant, medium complexity
+a single aloe vera with long thick pointed leaves radiating from one center
+a single agave with one large rosette of stiff pointed blue-green leaves
+a single string of pearls succulent with one long trailing stem of round bead-like leaves
+
+# Single cactus body
+a single round barrel cactus with prominent ribs and golden spines
+a single prickly pear cactus with flat thick oval pads stacked on one main stem
+a single tall columnar cereus cactus with one ribbed thick stem and white areoles
+a single saguaro-like cactus with one tall column and two side arms
+
+# ============================================================
+# FERNS — single crown, complex frond architecture
+# ============================================================
+
+# Few fronds from one crown
+a single bird's nest fern with wide undivided fronds emerging from one central rosette
+a single staghorn fern with broad flat shield fronds from one mounting point
+
+# Many fronds from one crown, moderate complexity
+a single boston fern with long arching compound fronds from one central crown
+a single maidenhair fern with delicate wiry black stems and fan-shaped leaflets from one base
+
+# Dense fronds from one crown, high complexity
+a single large sword fern with dozens of finely divided compound fronds from one root
+a single asparagus fern with dense feathery needle-like foliage on arching stems from one center
+a single japanese painted fern with intricately divided silvery-purple fronds from one crown
+
+# ============================================================
+# GRASSES & SEDGES — single tussock or culm
+# ============================================================
+
+# Single tall stem
+a single pampas grass stem with one tall culm and a fluffy white plume on top
+a single fountain grass with one arching stem and a foxtail seed head
+a single reed with one tall cylindrical stem and a brown seed head
+
+# Single tussock (one root system, many blades)
+a single blue fescue grass forming one tight spherical mound of thin leaves
+a single mondo grass plant with narrow dark green arching leaves from one root
+a single ornamental sedge with one fountain-like spray of thin green blades
+
+# Single bamboo-like culm
+a single bamboo culm with one thick segmented green stem and narrow leaves
+a single lucky bamboo with one thick spiraling stem and small leaf clusters
+a single papyrus stem with one tall triangular stem topped by an umbrella-like leaf cluster
+
+# ============================================================
+# VINES & CLIMBERS — single trailing or climbing stem
+# ============================================================
+
+# Single trailing stem, few leaves
+a single pothos vine with one trailing stem and five heart-shaped green leaves
+a single string of hearts vine with one thin wire-like stem and small paired leaves
+a single philodendron cutting with one stem and three large green leaves
+
+# Single vine, moderate complexity
+a single english ivy with one main climbing stem branching into lobed dark leaves
+a single monstera vine with one thick stem and aerial roots and split leaves
+
+# Single vine, high complexity
+a single jasmine vine with one woody main stem covered in small white star flowers
+a single passion flower vine with one stem bearing complex tendrils and intricate purple flowers
+a single wisteria vine with one thick twisted woody stem and hanging purple flower clusters
+
+# ============================================================
+# AQUATIC & MOISTURE-LOVING — single plant, unique forms
+# ============================================================
+
+# Simple single plant
+a single water lily with one stem holding a round leaf and one white flower
+a single lotus with one tall stem holding a large circular leaf above water
+
+# Single plant, more complex
+a single peace lily with one root crown producing dark green leaves and one white spathe
+a single calla lily with one thick stem and a single elegant white funnel-shaped spathe
+
+# ============================================================
+# TROPICAL FOLIAGE — single plant, large leaves, variable thickness
+# ============================================================
+
+# Thin petioles, few large leaves from one base
+a single young monstera with three large fenestrated leaves from one central stem
+a single anthurium with one glossy heart-shaped leaf and one red spathe flower
+a single caladium with three large paper-thin colorful arrow-shaped leaves from one tuber
+
+# Thick stem, large leaves from single trunk
+a single bird of paradise plant with one stiff thick main stem and large paddle-shaped leaves
+a single banana plant with one thick pseudostem and broad leaves unfurling from the top
+a single elephant ear plant with massive heart-shaped leaves on one thick fleshy main stalk
+
+# Single tropical plant, high complexity
+a single croton plant with one thick main stem and many multicolored leathery leaves
+a single prayer plant with one root crown producing many oval patterned leaves on branching stems
+a single fiddle-leaf fig with one tall stem and large violin-shaped dark green leaves
