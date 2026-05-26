@@ -26,7 +26,7 @@ Text prompts → TRELLIS (text-to-3DGS) → Static plant Gaussians
 PlantTwin/
 ├── configs/                  # Plant prompts and training configs
 ├── data/
-│   └── generation/           # Data generation scripts (TRELLIS + SVD)
+│   └── generation/           # Data generation scripts (TRELLIS + Wan2.1)
 ├── models/
 │   ├── physics_decoder/      # Feed-forward video → physics params (InternViT + Transformer)
 │   └── renderer/             # Differentiable Gaussian splatting renderer
@@ -121,7 +121,7 @@ huggingface-cli login
 python data/generation/gen_3dgs.py --prompt_file configs/plant_prompts.txt --output_dir data/plants_3dgs --smoke_test
 ```
 
-### Generate motion videos (SVD)
+### Generate motion videos (Wan2.1)
 
 ```bash
 python data/generation/gen_video.py --input_dir data/plants_3dgs --output_dir data/plants_video --smoke_test

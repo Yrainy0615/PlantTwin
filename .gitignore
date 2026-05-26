@@ -16,8 +16,11 @@ checkpoints/
 *.bin
 *.safetensors
 
-# HuggingFace cache
+# HuggingFace cache (local or redirected HF_HOME)
 .cache/
+hub/
+**/blobs/
+**/snapshots/
 
 # Python
 __pycache__/
