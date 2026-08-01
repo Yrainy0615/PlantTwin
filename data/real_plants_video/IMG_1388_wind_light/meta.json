@@ -1,0 +1,14 @@
+{
+  "source_image": "data/IMG_1388.JPG",
+  "plant_desc": "a potted plant with large broad heart-shaped leaves on thin branches",
+  "force_type": "wind_light",
+  "force_description": "gentle breeze causing subtle leaf movement",
+  "prompt": "A a potted plant with large broad heart-shaped leaves on thin branches swaying left and right in a gentle breeze, leaves trembling, branches oscillating softly side to side, natural wind-driven plant motion, static background, high quality",
+  "negative_prompt": "turntable, 360 degree rotation, orbit, product shot, product photography, camera rotation, camera pan, camera zoom, camera movement, static, no motion, frozen, low quality, blur, watermark, text",
+  "guidance_scale": 6.5,
+  "num_frames": 81,
+  "fps": 16,
+  "seed": 42,
+  "height": 480,
+  "width": 832
+}

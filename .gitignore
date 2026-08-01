@@ -1,5 +1,10 @@
-# Third party repos
-third_party/
+# Third party repos (GaussianPlant is tracked as a git submodule)
+third_party/*
+!third_party/GaussianPlant
+
+# Claude Code local files
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
 
 # Generated data
 data/plants_3dgs/
@@ -46,3 +51,6 @@ docs/related_works/
 
 # Temporary
 /tmp/
+
+# vim swap
+*.swp

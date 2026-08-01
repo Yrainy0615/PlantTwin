@@ -1,13 +1,17 @@
 """
 Differentiable Gaussian Splatting renderer for PlantTwin.
-Wraps diff_gaussian_rasterization to render deformed plant Gaussians.
+
+Backend: gsplat (following the new GaussianPlant renderer,
+third_party/GaussianPlant/gaussian_renderer/__init__.py). Replaces the old
+diff_gaussian_rasterization CUDA fork; the public interface (camera dicts with
+view_matrix / proj_matrix / campos / tanfov*) is unchanged.
 Supports rendering a trajectory of positions into a video sequence.
 """
 import math
 import torch
 import torch.nn as nn
 import numpy as np
-from diff_gaussian_rasterization import GaussianRasterizationSettings, GaussianRasterizer
+from gsplat import rasterization
 
 
 def quaternion_multiply(q1, q2):
@@ -137,7 +141,7 @@ class GaussianRenderer(nn.Module):
             'tanfovy': math.tan(fovy.item() * 0.5),
         }
 
-    def render_frame(self, means3D, scales, rotations, opacities, colors, camera):
+    def render_frame(self, means3D, scales, rotations, opacities, colors, camera, shs=None):
         """
         Render one frame.
 
@@ -146,48 +150,56 @@ class GaussianRenderer(nn.Module):
             scales: [N, 3] Gaussian scales
             rotations: [N, 4] quaternions (wxyz)
             opacities: [N, 1] opacity values
-            colors: [N, 3] RGB colors (precomputed)
+            colors: [N, 3] RGB colors (precomputed; used if shs is None)
+            shs: [N, K, 3] SH coefficients (used if provided, sh_degree must be set)
             camera: dict from get_camera()
 
         Returns:
             image: [3, H, W] rendered image
         """
-        N = means3D.shape[0]
-        subpixel_offset = torch.zeros(self.H, self.W, 2, device=means3D.device)
+        device = means3D.device
 
-        settings = GaussianRasterizationSettings(
-            image_height=self.H,
-            image_width=self.W,
-            tanfovx=camera['tanfovx'],
-            tanfovy=camera['tanfovy'],
-            kernel_size=0.0,
-            subpixel_offset=subpixel_offset,
-            bg=self.bg,
-            scale_modifier=1.0,
-            viewmatrix=camera['view_matrix'],
-            projmatrix=camera['proj_matrix'],
-            sh_degree=self.sh_degree,
-            campos=camera['campos'],
-            prefiltered=False,
-            debug=False,
-        )
+        # view_matrix is stored transposed (column-major for the old CUDA
+        # rasterizer); gsplat wants the plain W2C matrix.
+        viewmat = camera['view_matrix'].transpose(0, 1).contiguous()
 
-        rasterizer = GaussianRasterizer(raster_settings=settings)
-        means2D = torch.zeros(N, 3, device=means3D.device, requires_grad=True)
+        # Intrinsics: use exact fx/fy/cx/cy when the camera provides them
+        # (COLMAP cams may have an off-center principal point), otherwise
+        # reconstruct a centered pinhole K from tanfov.
+        if 'fx' in camera:
+            fx, fy = camera['fx'], camera['fy']
+            cx, cy = camera['cx'], camera['cy']
+        else:
+            fx = self.W / (2.0 * camera['tanfovx'])
+            fy = self.H / (2.0 * camera['tanfovy'])
+            cx, cy = self.W * 0.5, self.H * 0.5
+        K = torch.tensor([[fx, 0.0, cx], [0.0, fy, cy], [0.0, 0.0, 1.0]],
+                         dtype=torch.float32, device=device)
 
-        rendered, _ = rasterizer(
-            means3D=means3D,
-            means2D=means2D,
-            shs=None,
-            colors_precomp=colors,
-            opacities=opacities,
+        if shs is not None:
+            colors_in, sh_degree = shs, self.sh_degree   # [N, K, 3] SH coeffs
+        else:
+            colors_in, sh_degree = colors, None          # [N, 3] precomputed RGB
+
+        rendered, _alpha, _info = rasterization(
+            means=means3D,
+            quats=rotations,                 # [N, 4] wxyz (gsplat normalizes)
             scales=scales,
-            rotations=rotations,
+            opacities=opacities.squeeze(-1) if opacities.dim() == 2 else opacities,
+            colors=colors_in,
+            viewmats=viewmat[None],
+            Ks=K[None],
+            width=self.W,
+            height=self.H,
+            sh_degree=sh_degree,
+            render_mode='RGB',
+            backgrounds=self.bg[None].to(device),
+            packed=False,
         )
-        return rendered  # [3, H, W]
+        return rendered[0].permute(2, 0, 1)  # [1,H,W,3] -> [3, H, W]
 
     def render_trajectory(self, trajectory, scales, rotations, opacities, colors,
-                          camera=None, azimuth=0.0, elevation=15.0, radius=3.0):
+                          camera=None, azimuth=0.0, elevation=15.0, radius=3.0, shs=None):
         """
         Render a trajectory of Gaussian positions into a video.
 
@@ -196,7 +208,8 @@ class GaussianRenderer(nn.Module):
             scales: [N, 3] (static)
             rotations: [N, 4] (static)
             opacities: [N, 1] (static)
-            colors: [N, 3] (static)
+            colors: [N, 3] (static, used if shs is None)
+            shs: optional [N, K, 3] SH coefficients
             camera: optional pre-computed camera dict
 
         Returns:
@@ -209,7 +222,8 @@ class GaussianRenderer(nn.Module):
 
         frames = []
         for t in range(trajectory.shape[0]):
-            frame = self.render_frame(trajectory[t], scales, rotations, opacities, colors, camera)
+            frame = self.render_frame(trajectory[t], scales, rotations, opacities,
+                                       colors, camera, shs=shs)
             frames.append(frame)
 
         return torch.stack(frames, dim=0)  # [T, 3, H, W]

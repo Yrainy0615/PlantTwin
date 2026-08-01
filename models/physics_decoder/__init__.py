@@ -1,1 +1,2 @@
 from .video_decoder import VideoPhysicsDecoder
+from .plant_material_network import PlantMaterialNetwork

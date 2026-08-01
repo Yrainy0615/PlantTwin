@@ -1,0 +1,14 @@
+{
+  "source_image": "data/IMG_1388.JPG",
+  "plant_desc": "a potted plant with large broad heart-shaped leaves on thin branches",
+  "force_type": "wind_intense",
+  "force_description": "strong wind causing large plant sway",
+  "prompt": "A a potted plant with large broad heart-shaped leaves on thin branches violently shaking in strong wind, branches whipping left and right, leaves fluttering chaotically, large amplitude swaying motion, static background, high quality",
+  "negative_prompt": "turntable, 360 degree rotation, orbit, product shot, product photography, camera rotation, camera pan, camera zoom, camera movement, static, no motion, frozen, low quality, blur, watermark, text",
+  "guidance_scale": 7.5,
+  "num_frames": 81,
+  "fps": 16,
+  "seed": 142,
+  "height": 480,
+  "width": 832
+}
